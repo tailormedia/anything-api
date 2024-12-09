@@ -13,6 +13,8 @@ from anythingapi import AnythingAPI
 api = AnythingAPI.create(
     from_template="reserve_restaurant_table"
 )
+# AnythingAPI will find the website of the restaurant, open it, find the email,
+# send an email to the restaurant to reserve a table
 api_task = api.post({
   "inputs" : {
     "restaurant_name": "The Restaurant",
@@ -22,8 +24,6 @@ api_task = api.post({
     "number_of_people": 4
   }
 })
-
-print(api_task.status())
 
 await api_task.wait()
 
@@ -48,6 +48,16 @@ Some of the use cases are:
 - 🛍️ E-commerce: Get product details, prices and reviews
 - 📄 Operations: Submit documents to institution websites
 - 📡 Monitoring: Gather data from unstructured websites on a regular basis
+
+## How it works
+
+AnythingAPI leverages a combination of technologies to transform any website into a structured API:
+
+- **Web Scraping**: We utilize sophisticated web scraping techniques to extract data from websites, enabling interaction with sites that do not offer traditional APIs.
+- **Multimodal Models**: Our system employs multimodal models to interpret and understand user interfaces and web pages, allowing for seamless navigation and data extraction.
+- **Large Language Models (LLMs)**: We integrate LLMs to process and generate human-like text, enhancing the ability to interact with web content and automate tasks.
+- **Integrations**: Our platform supports integrations for sending emails and other forms of communication, ensuring that tasks such as reservations and inquiries are handled efficiently.
+- **AI Agentic Framework**: Built on the AI agentic framework of [TailorTask.ai](https://www.tailortask.ai), AnythingAPI coordinates complex tasks by deploying AI agents that can autonomously perform actions and make decisions.
 
 ## Installation
 
@@ -142,7 +152,7 @@ task_id = api_task.id
 
 CURL example:
 
-```http
+```bash
 curl -X POST https://api.anythingapi.com/v1/tasks/{task_id} \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
@@ -169,7 +179,7 @@ status = api_task.status()
 
 CURL example:
 
-```http
+```bash
 curl -X GET https://api.anythingapi.com/v1/tasks/{task_id} \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
@@ -202,7 +212,7 @@ api_task.stop()
 
 CURL example:
 
-```http
+```bash
 curl -X DELETE https://api.anythingapi.com/v1/tasks/{task_id} \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
@@ -217,7 +227,7 @@ tasks = AnythingAPI.list_tasks()
 
 CURL example:
 
-```http
+```bash
 curl -X GET https://api.anythingapi.com/v1/tasks \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
@@ -243,7 +253,7 @@ apis = AnythingAPI.list_apis()
 
 CURL example:
 
-```http
+```bash
 curl -X GET https://api.anythingapi.com/v1/apis \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
